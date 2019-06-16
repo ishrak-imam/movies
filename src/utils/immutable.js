@@ -94,7 +94,7 @@ export const shiftFromList = list => {
  */
 
 export const readValue = (of, from) => {
-  return from.get(of)
+  return Array.isArray(of) ? from.getIn(of) : from.get(of)
 }
 
 export const listToMap = (list, key) => {
