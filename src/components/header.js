@@ -64,7 +64,7 @@ export default class Header extends Component {
 
 const ss = StyleSheet.create({
   container: {
-    height: isIOS ? 45 : 55,
+    height: 50,
     flexDirection: 'row',
     backgroundColor: Colors.black
   },

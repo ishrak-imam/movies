@@ -1,14 +1,16 @@
 
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
 import { Colors } from '../theme'
 
 export default class Screen extends Component {
   render () {
+    const { style } = this.props
     return (
-      <View style={ss.screen}>
+      <SafeAreaView style={{ ...ss.screen, ...style }}>
         {this.props.children}
-      </View>
+      </SafeAreaView>
     )
   }
 }
