@@ -11,7 +11,7 @@ function formatMovieResults (result) {
     page: result.page,
     totalPages: result.total_pages,
     totalResults: result.total_results,
-    movies: result.results
+    list: result.results
   }
 }
 

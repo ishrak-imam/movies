@@ -5,7 +5,8 @@ import IonIcon from 'react-native-vector-icons/Ionicons'
 const getIconName = name => {
   const icons = {
     back: ['ios-arrow-back', 'md-arrow-back'],
-    menu: ['ios-menu', 'md-menu']
+    menu: ['ios-menu', 'md-menu'],
+    star: ['ios-star', 'md-star']
   }
   const result = icons[name]
   return isIOS ? result[0] : result[1]

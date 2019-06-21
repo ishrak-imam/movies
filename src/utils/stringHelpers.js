@@ -25,5 +25,6 @@ export const checkSSN = ssn => {
 }
 
 export const stringShorten = (str, limit) => {
-  return `${str.substring(0, limit)} ...`
+  if (str.length < limit) return str
+  return `${str.substring(0, limit)}...`
 }

@@ -20,7 +20,7 @@ export const movies = createReducer(MOVIES_INITIAL_STATE, {
     movieGroup = setIntoMap(movieGroup, 'page', movieData.page)
     movieGroup = setIntoMap(movieGroup, 'totalResults', movieData.totalResults)
     movieGroup = setIntoMap(movieGroup, 'totalPages', movieData.totalPages)
-    movieGroup = setIntoMap(movieGroup, 'movies', concatList(readValue('movies', movieGroup), getImmutableObject(movieData.movies)))
+    movieGroup = setIntoMap(movieGroup, 'list', concatList(readValue('list', movieGroup), getImmutableObject(movieData.list)))
     return setIntoMap(state, payload.type, movieGroup)
   },
 

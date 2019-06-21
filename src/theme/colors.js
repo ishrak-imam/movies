@@ -13,7 +13,8 @@ const Colors = {
   ember: '#A42830',
   fire: '#E73536',
   blue: '#2296F3',
-  black: '#000000'
+  black: '#000000',
+  gold: '#FFD700'
 }
 
 export default Colors
