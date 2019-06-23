@@ -9,11 +9,29 @@ import { actionDispatcher } from '../../utils/actionDispatcher'
 import { moviesReq } from './action'
 import { getMovies } from '../../selectors'
 import { connect } from 'react-redux'
+import Loader from '../../components/loader'
+
+const ITEM_HEIGHT = 170
+const SEPARATOR_HEIGHT = 10
 
 class MovieList extends Component {
   componentDidMount () {
     const { type } = this.props
-    this._requestMovies(type)
+    this._requestMovies({
+      type,
+      page: 1,
+      refreshing: false
+    })
+  }
+
+  get loading () {
+    const { movies } = this.props
+    return movies.get('loading')
+  }
+
+  get refreshing () {
+    const { movies } = this.props
+    return movies.get('refreshing')
   }
 
   _renderMovie = ({ item }) => {
@@ -28,17 +46,48 @@ class MovieList extends Component {
     const totalPages = movies.get('totalPages')
     const loading = movies.get('loading')
     if (!loading && page < totalPages) {
-      this._requestMovies(type, page + 1)
+      this._requestMovies({
+        type,
+        page: page + 1,
+        refreshing: false
+      })
     }
   }
 
-  _requestMovies = (type, page = 1) => {
-    actionDispatcher(moviesReq({
-      type, page
-    }))
+  _requestMovies = options => {
+    actionDispatcher(moviesReq(options))
+  }
+
+  _onRefresh = () => {
+    const { type } = this.props
+    this._requestMovies({
+      type,
+      page: 1,
+      refreshing: true
+    })
   }
 
   _keyExtractor = item => String(item.get('id'))
+
+  _renderFooter = () => {
+    return this.loading
+      ? <View style={ss.footer}>
+        <Loader />
+      </View>
+      : null
+  }
+
+  _getItemLayout = (data, index) => {
+    return {
+      length: ITEM_HEIGHT,
+      offset: (ITEM_HEIGHT + SEPARATOR_HEIGHT) * index,
+      index
+    }
+  }
+
+  _renderSeparator = () => {
+    return <View style={ss.separator} />
+  }
 
   _renderList = list => {
     return (
@@ -49,6 +98,11 @@ class MovieList extends Component {
         renderItem={this._renderMovie}
         onEndReached={this._requestNextPage}
         onEndReachedThreshold={0.5}
+        onRefresh={this._onRefresh}
+        refreshing={this.refreshing}
+        ListFooterComponent={this._renderFooter}
+        getItemLayout={this._getItemLayout}
+        ItemSeparatorComponent={this._renderSeparator}
       />
     )
   }
@@ -78,7 +132,15 @@ const ss = StyleSheet.create({
     flex: 1
   },
   flatList: {
-    paddingHorizontal: 10,
-    paddingBottom: 5
+    paddingVertical: 5
+  },
+  separator: {
+    height: SEPARATOR_HEIGHT,
+    backgroundColor: 'transparent',
+    width: '100%'
+  },
+  footer: {
+    height: 60,
+    width: '100%'
   }
 })

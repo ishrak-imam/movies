@@ -18,6 +18,6 @@ export default class Screen extends Component {
 const ss = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: Colors.black
+    backgroundColor: Colors.steel
   }
 })

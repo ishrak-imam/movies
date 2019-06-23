@@ -9,7 +9,6 @@ const Colors = {
   charcoal: '#595959',
   cloud: '#E5E5E5',
   coal: '#2D2D2D',
-  bloodOrange: '#FB5F26',
   ember: '#A42830',
   fire: '#E73536',
   blue: '#2296F3',

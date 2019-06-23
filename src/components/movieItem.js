@@ -9,7 +9,7 @@ import config from '../utils/config'
 import { format } from 'date-fns'
 import { stringShorten } from '../utils/stringHelpers'
 
-const DATE_FORMAT = 'YYYY'
+const DATE_FORMAT = 'YYYY-MM-DD'
 const OVERVIEW_LIMIT = 120
 
 export default class MovieItem extends Component {
@@ -51,14 +51,10 @@ const ss = StyleSheet.create({
     width: '100%',
     height: 170,
     flexDirection: 'row',
-    backgroundColor: Colors.white,
-    marginTop: 7,
-    borderRadius: 5
+    backgroundColor: Colors.white
   },
   poster: {
-    flex: 1.7,
-    borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5
+    flex: 1.7
   },
   info: {
     flex: 3.5,

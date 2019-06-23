@@ -28,3 +28,8 @@ export const stringShorten = (str, limit) => {
   if (str.length < limit) return str
   return `${str.substring(0, limit)}...`
 }
+
+export const toQueryString = obj => {
+  const queryParams = Object.keys(obj).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`)
+  return queryParams.join('&')
+}

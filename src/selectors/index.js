@@ -1,4 +1,5 @@
 
 export const {
-  getMovies
+  getMovies,
+  getMovieList
 } = require('./movies')

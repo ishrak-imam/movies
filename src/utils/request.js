@@ -84,6 +84,6 @@ export const getRequest = (endPoint, headers = {}) => {
 // }
 
 // function serialize (obj) {
-//   const queryParams = Object.keys(obj).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`);
-//   return queryParams.join('&');
+  // const queryParams = Object.keys(obj).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`);
+  // return queryParams.join('&');
 // }

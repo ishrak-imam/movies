@@ -2,8 +2,9 @@
 import { getMap, getList } from '../../utils/immutable'
 
 export const MOVIES_INITIAL_STATE = getMap({
-  now_playing: getMap({
+  nowPlaying: getMap({
     loading: false,
+    refreshing: false,
     list: getList([]),
     page: 0,
     totalResults: 0,
@@ -12,14 +13,16 @@ export const MOVIES_INITIAL_STATE = getMap({
 
   popular: getMap({
     loading: false,
+    refreshing: false,
     list: getList([]),
     page: 0,
     totalResults: 0,
     totalPages: 0
   }),
 
-  top_rated: getMap({
+  topRated: getMap({
     loading: false,
+    refreshing: false,
     list: getList([]),
     page: 0,
     totalResults: 0,
@@ -28,6 +31,7 @@ export const MOVIES_INITIAL_STATE = getMap({
 
   upcoming: getMap({
     loading: false,
+    refreshing: false,
     list: getList([]),
     page: 0,
     totalResults: 0,
