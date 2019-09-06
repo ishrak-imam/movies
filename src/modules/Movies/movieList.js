@@ -10,6 +10,7 @@ import { moviesReq } from './action'
 import { getMovies } from '../../selectors'
 import { connect } from 'react-redux'
 import Loader from '../../components/loader'
+import { Colors } from '../../theme'
 
 const ITEM_HEIGHT = 170
 const SEPARATOR_HEIGHT = 10
@@ -136,7 +137,7 @@ const ss = StyleSheet.create({
   },
   separator: {
     height: SEPARATOR_HEIGHT,
-    backgroundColor: 'transparent',
+    backgroundColor: Colors.cloud,
     width: '100%'
   },
   footer: {

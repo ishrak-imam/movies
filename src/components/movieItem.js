@@ -21,11 +21,12 @@ export default class MovieItem extends Component {
     const { movie } = this.props
     const year = format(movie.get('release_date'), DATE_FORMAT)
     const overview = stringShorten(movie.get('overview'), OVERVIEW_LIMIT)
+
     return (
       <View style={ss.movie}>
         <Image
           resizeMode='stretch'
-          source={{ uri: `${config.TMDB_IMG_URL}/${movie.get('poster_path')}` }}
+          source={{ uri: `${config.TMDB_IMG_URL}${movie.get('poster_path')}` }}
           style={ss.poster}
         />
         <View style={ss.info}>
