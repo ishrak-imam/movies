@@ -39,3 +39,7 @@ export const requestMovies = (type, page) => {
 
   return getRequest(`/discover/movie?page=${page}&${toQueryString(query)}&region=US`)
 }
+
+export const requestGenres = () => {
+  return getRequest('/genre/movie/list?language=en-US')
+}

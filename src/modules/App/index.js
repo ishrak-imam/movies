@@ -4,8 +4,13 @@ import { setNavigator } from '../../navigation/service'
 import { setCurrentScreen } from '../../navigation/action'
 import RootNavigator from '../../navigation'
 import { actionDispatcher } from '../../utils/actionDispatcher'
+import { genresReq } from '../Movies/action'
 
 export default class App extends Component {
+  componentDidMount () {
+    actionDispatcher(genresReq())
+  }
+
   _handleNavigationStateChange = (prevState, currentState, action) => {
     // console.log(prevState, currentState, action)
     const lev1 = currentState.routes[currentState.index]

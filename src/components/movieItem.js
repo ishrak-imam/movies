@@ -33,6 +33,7 @@ export default class MovieItem extends Component {
           <View>
             <Text style={ss.title}>{movie.get('title')}</Text>
             <Text style={ss.release}>{year}</Text>
+            {/* <Text style={ss.release}>Drama, Thriller</Text> */}
           </View>
           <View style={ss.rating}>
             <Icon name='star' color={Colors.gold} style={ss.rIcon} size={20} />

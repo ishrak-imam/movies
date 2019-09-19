@@ -4,9 +4,10 @@ import {
   takeEvery, select
 } from 'redux-saga/effects'
 import {
-  moviesReq, moviesSucs, moviesFail
+  moviesReq, moviesSucs, moviesFail,
+  genresReq, genresSucs, genresFail
 } from './action'
-import { requestMovies } from './api'
+import { requestMovies, requestGenres } from './api'
 import { getMovieList } from '../../selectors'
 import { setIntoMap, getImmutableObject, concatList, readValue } from '../../utils/immutable'
 
@@ -35,5 +36,18 @@ function * workerMoviesReq (action) {
     yield put(moviesSucs({ type, movieData }))
   } catch (e) {
     yield put(moviesFail({ type }))
+  }
+}
+
+export function * watchGenresReq () {
+  yield takeEvery(genresReq.getType(), workerGenresReq)
+}
+
+function * workerGenresReq (action) {
+  try {
+    const { genres } = yield call(requestGenres)
+    yield put(genresSucs(genres))
+  } catch (e) {
+    yield put(genresFail())
   }
 }

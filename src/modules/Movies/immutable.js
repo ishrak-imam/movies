@@ -36,5 +36,7 @@ export const MOVIES_INITIAL_STATE = getMap({
     page: 0,
     totalResults: 0,
     totalPages: 0
-  })
+  }),
+
+  genres: getList([])
 })
