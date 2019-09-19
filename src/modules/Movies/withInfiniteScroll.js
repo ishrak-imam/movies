@@ -2,11 +2,11 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import { actionDispatcher } from './actionDispatcher'
-import Loader from '../components/loader'
-import Screen from '../components/screen'
-import Header from '../components/header'
-import { Icon } from '../theme'
+import { actionDispatcher } from '../../utils/actionDispatcher'
+import Loader from '../../components/loader'
+import Screen from '../../components/screen'
+import Header from '../../components/header'
+import { Icon } from '../../theme'
 
 const TAB_CONFIGS = {
   NowPlaying: { name: 'Now Playing', icon: 'play' },
@@ -15,7 +15,7 @@ const TAB_CONFIGS = {
   Upcoming: { name: 'Upcoming', icon: 'timer' }
 }
 
-const withInfiniteScroll = (stateToProps, listItem, metaData) => {
+const WithInfiniteScroll = (stateToProps, listItem, metaData) => {
   class InfiniteScrollComponent extends Component {
     static _getTabConfig = navigation => {
       const routeName = navigation.state.routeName
@@ -148,7 +148,7 @@ const withInfiniteScroll = (stateToProps, listItem, metaData) => {
   return connect(stateToProps, null)(InfiniteScrollComponent)
 }
 
-export default withInfiniteScroll
+export default WithInfiniteScroll
 
 const ss = StyleSheet.create({
   wrapper: {
