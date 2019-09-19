@@ -4,10 +4,34 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { actionDispatcher } from './actionDispatcher'
 import Loader from '../components/loader'
-import { Colors } from '../theme'
+import Screen from '../components/screen'
+import Header from '../components/header'
+import { Icon } from '../theme'
+
+const TAB_CONFIGS = {
+  NowPlaying: { name: 'Now Playing', icon: 'play' },
+  Popular: { name: 'Popular', icon: 'star' },
+  TopRated: { name: 'Top Rated', icon: 'ribbon' },
+  Upcoming: { name: 'Upcoming', icon: 'timer' }
+}
 
 const withInfiniteScroll = (stateToProps, listItem, metaData) => {
   class InfiniteScrollComponent extends Component {
+    static _getTabConfig = navigation => {
+      const routeName = navigation.state.routeName
+      return TAB_CONFIGS[routeName]
+    }
+
+    static navigationOptions = ({ navigation }) => {
+      const { icon, name } = InfiniteScrollComponent._getTabConfig(navigation)
+      return {
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <Icon name={icon} color={tintColor} />
+        },
+        tabBarLabel: name
+      }
+    }
+
     componentDidMount () {
       const { type } = metaData
       this._requestData({
@@ -76,8 +100,16 @@ const withInfiniteScroll = (stateToProps, listItem, metaData) => {
     }
 
     _renderSeparator = () => {
-      const { SEPARATOR_HEIGHT } = metaData
-      return <View style={[ss.separator, { height: SEPARATOR_HEIGHT }]} />
+      const { SEPARATOR_HEIGHT, SEPARATOR_COLOR } = metaData
+      return <View
+        style={[
+          ss.separator,
+          {
+            height: SEPARATOR_HEIGHT,
+            backgroundColor: SEPARATOR_COLOR
+          }
+        ]}
+      />
     }
 
     _renderList = list => {
@@ -99,12 +131,16 @@ const withInfiniteScroll = (stateToProps, listItem, metaData) => {
     }
 
     render () {
-      const { data } = this.props
+      const { data, navigation } = this.props
       const list = data.get('list')
+      const { name } = InfiniteScrollComponent._getTabConfig(navigation)
       return (
-        <View style={ss.wrapper}>
-          {this._renderList(list)}
-        </View>
+        <Screen>
+          <Header icon='menu' title={name} navigation={navigation} />
+          <View style={ss.wrapper}>
+            {this._renderList(list)}
+          </View>
+        </Screen>
       )
     }
   }
@@ -122,7 +158,6 @@ const ss = StyleSheet.create({
     paddingVertical: 5
   },
   separator: {
-    backgroundColor: Colors.cloud,
     width: '100%'
   },
   footer: {

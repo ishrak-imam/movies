@@ -12,7 +12,7 @@ export default class Header extends Component {
     return (
       <View style={ss.left}>
         <TouchableOpacity style={ss.leftIcon} onPress={this._onLeftPress(icon)}>
-          <Icon name={icon} color={Colors.white} size={27} />
+          <Icon name={icon} color={Colors.green} size={27} />
         </TouchableOpacity>
       </View>
     )
@@ -88,6 +88,6 @@ const ss = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     fontSize: 18,
-    color: Colors.white
+    color: Colors.green
   }
 })

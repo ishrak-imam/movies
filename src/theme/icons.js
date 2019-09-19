@@ -6,7 +6,10 @@ const getIconName = name => {
   const icons = {
     back: ['ios-arrow-back', 'md-arrow-back'],
     menu: ['ios-menu', 'md-menu'],
-    star: ['ios-star', 'md-star']
+    star: ['ios-star', 'md-star'],
+    play: ['ios-play', 'md-play'],
+    ribbon: ['ios-ribbon', 'md-ribbon'],
+    timer: ['ios-timer', 'md-timer']
   }
   const result = icons[name]
   return isIOS ? result[0] : result[1]

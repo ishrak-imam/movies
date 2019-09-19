@@ -1,21 +1,44 @@
 
 import React from 'react'
-
 import {
   createStackNavigator,
   createDrawerNavigator,
-  createAppContainer
+  createAppContainer,
+  createBottomTabNavigator,
+  createMaterialTopTabNavigator
 } from 'react-navigation'
 
-import MoviesScreen from '../modules/Movies'
+import isIOS from '../utils/isIOS'
+
 import Drawer from '../modules/Drawer'
+import TabBar from '../components/tabBar'
+
+import MovieList from '../modules/Movies/movieList'
+
+const createTabNavigator = isIOS ? createBottomTabNavigator : createMaterialTopTabNavigator
+
+const MovieTabs = createTabNavigator(
+  {
+    NowPlaying: MovieList('nowPlaying'),
+    Popular: MovieList('popular'),
+    TopRated: MovieList('topRated'),
+    Upcoming: MovieList('upcoming')
+  },
+  {
+    initialRouteName: 'NowPlaying',
+    headerMode: 'none',
+    tabBarPosition: 'bottom',
+    lazy: true,
+    tabBarComponent: props => <TabBar {...props} />
+  }
+)
 
 const AppNavigator = createStackNavigator(
   {
-    Movies: MoviesScreen
+    Home: MovieTabs
   },
   {
-    initialRouteName: 'Movies',
+    initialRouteName: 'Home',
     mode: 'modal',
     headerMode: 'none',
     navigationOptions: {
