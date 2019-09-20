@@ -32,6 +32,10 @@ const WithInfiniteScroll = (stateToProps, listItem, metaData) => {
       }
     }
 
+    shouldComponentUpdate (nextProps) {
+      return !nextProps.data.equals(this.props.data)
+    }
+
     componentDidMount () {
       const { type } = metaData
       this._requestData({
@@ -80,7 +84,7 @@ const WithInfiniteScroll = (stateToProps, listItem, metaData) => {
       })
     }
 
-    _keyExtractor = item => String(item.get('id'))
+    _keyExtractor = item => String(item)
 
     _renderFooter = () => {
       return this.loading
@@ -132,13 +136,12 @@ const WithInfiniteScroll = (stateToProps, listItem, metaData) => {
 
     render () {
       const { data, navigation } = this.props
-      const list = data.get('list')
       const { name } = InfiniteScrollComponent._getTabConfig(navigation)
       return (
         <Screen>
           <Header icon='menu' title={name} navigation={navigation} />
           <View style={ss.wrapper}>
-            {this._renderList(list)}
+            {this._renderList(data.get('ids'))}
           </View>
         </Screen>
       )

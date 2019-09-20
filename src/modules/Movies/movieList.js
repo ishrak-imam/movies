@@ -12,7 +12,7 @@ const SEPARATOR_COLOR = Colors.cloud
 
 const MovieList = type => ListWithInfiniteScroll(
   state => ({ data: getMovies(state, type) }), // stateToProps fn
-  ({ item }) => (<MovieItem movie={item} />), // list item component
+  ({ item }) => (<MovieItem id={item} type={type} />), // list item component
   { // metadata or configuration data
     type,
     dataReqAction: moviesReq,

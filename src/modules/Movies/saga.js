@@ -8,15 +8,26 @@ import {
   genresReq, genresSucs, genresFail
 } from './action'
 import { requestMovies, requestGenres } from './api'
-import { getMovieList } from '../../selectors'
-import { setIntoMap, getImmutableObject, concatList, readValue } from '../../utils/immutable'
+import { getMovieIds, getMovieItems } from '../../selectors'
+import {
+  setIntoMap, getImmutableObject,
+  concatList, readValue, mergeMapShallow
+} from '../../utils/immutable'
 
 function formatMovieResults (result) {
+  const { ids, data } = result.results.reduce((map, item) => {
+    const id = item.id
+    map.ids.push(id)
+    map.data[id] = item
+    return map
+  }, { ids: [], data: {} })
+
   return getImmutableObject({
     page: result.page,
     totalPages: result.total_pages,
     totalResults: result.total_results,
-    list: result.results
+    ids,
+    data
   })
 }
 
@@ -30,8 +41,10 @@ function * workerMoviesReq (action) {
     let movieData = yield call(requestMovies, type, page)
     movieData = formatMovieResults(movieData)
     if (!refreshing) {
-      const list = yield select(getMovieList, type)
-      movieData = setIntoMap(movieData, 'list', concatList(list, readValue('list', movieData)))
+      const ids = yield select(getMovieIds, type)
+      const movies = yield select(getMovieItems, type)
+      movieData = setIntoMap(movieData, 'ids', concatList(ids, readValue('ids', movieData)))
+      movieData = setIntoMap(movieData, 'data', mergeMapShallow(movies, readValue('data', movieData)))
     }
     yield put(moviesSucs({ type, movieData }))
   } catch (e) {

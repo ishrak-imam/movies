@@ -8,13 +8,15 @@ import { Colors, Icon } from '../theme'
 import config from '../utils/config'
 import { format } from 'date-fns'
 import { stringShorten } from '../utils/stringHelpers'
+import { getMovie } from '../selectors'
+import { connect } from 'react-redux'
 
 const DATE_FORMAT = 'YYYY-MM-DD'
 const OVERVIEW_LIMIT = 120
 
-export default class MovieItem extends Component {
+class MovieItem extends Component {
   shouldComponentUpdate (nextProps) {
-    return nextProps.movie.get('id') !== this.props.movie.get('id')
+    return nextProps.id !== this.props.id
   }
 
   render () {
@@ -47,6 +49,15 @@ export default class MovieItem extends Component {
     )
   }
 }
+
+const stateToProps = (state, props) => {
+  const { type, id } = props
+  return {
+    movie: getMovie(state, type, String(id))
+  }
+}
+
+export default connect(stateToProps, null)(MovieItem)
 
 const ss = StyleSheet.create({
   movie: {

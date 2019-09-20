@@ -5,7 +5,8 @@ export const MOVIES_INITIAL_STATE = getMap({
   nowPlaying: getMap({
     loading: false,
     refreshing: false,
-    list: getList([]),
+    ids: getList([]),
+    data: getMap({}),
     page: 0,
     totalResults: 0,
     totalPages: 0
@@ -14,7 +15,8 @@ export const MOVIES_INITIAL_STATE = getMap({
   popular: getMap({
     loading: false,
     refreshing: false,
-    list: getList([]),
+    ids: getList([]),
+    data: getMap({}),
     page: 0,
     totalResults: 0,
     totalPages: 0
@@ -23,7 +25,8 @@ export const MOVIES_INITIAL_STATE = getMap({
   topRated: getMap({
     loading: false,
     refreshing: false,
-    list: getList([]),
+    ids: getList([]),
+    data: getMap({}),
     page: 0,
     totalResults: 0,
     totalPages: 0
@@ -32,7 +35,8 @@ export const MOVIES_INITIAL_STATE = getMap({
   upcoming: getMap({
     loading: false,
     refreshing: false,
-    list: getList([]),
+    ids: getList([]),
+    data: getMap({}),
     page: 0,
     totalResults: 0,
     totalPages: 0
